@@ -1,0 +1,5 @@
+= deployit_cmd
+
+Generate this with
+    deployit_cmd rdoc
+After you have described your command line interface

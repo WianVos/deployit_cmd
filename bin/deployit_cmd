@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+require 'pp'
+require 'gli'
+
+require 'deployit_cmd'
+
+
+include GLI::App
+
+program_desc 'a cli to deployit'
+config_file 'deployit_cmd.txt'
+
+version DeployitCmd::VERSION
+
+desc 'use ssl'
+switch [:s,:ssl]
+
+
+desc 'admin user'
+default_value 'admin'
+arg_name 'the deployit admin user'
+flag [:a,:admin_user]
+
+desc 'admin password'
+default_value 'admin'
+arg_name 'the deployit admin password'
+flag [:P,:admin_password]
+
+desc 'deployit server address'
+default_value 'deployit39.k94.kvk.nl'
+arg_name 'deployit hostname'
+flag [:h,:hostname]
+
+desc 'deployit server port'
+default_value '4516'
+arg_name 'deployit port'
+flag [:p,:port]
+
+desc 'context root'
+default_value ''
+arg_name 'the context root deployit is listening on'
+flag [:c, :context_root]
+
+desc 'Describe remove_host here'
+arg_name 'Describe arguments to remove_host here'
+
+command :test do |c|
+  c.desc 'Describe a switch to test'
+  c.switch :s
+
+  c.desc 'Describe a flag to remove_host'
+  c.default_value 'default'
+  c.flag :f
+  c.action do |global_options,options,args|
+   ci =  Deployit::Ci.new({'id' => 'Infrastructure/ZMM/zmm-test-demo2/dev/zs94a-qppnem'})
+   p "properties -----------------------"
+   p ci.properties
+   p "type -----------------------"
+   p ci.type
+   p "children -------------------------"
+   p ci.children
+   ci.children.each { |ci| pp ci.to_hash }
+
+    puts "test command ran"
+  end
+end
+
+pre do |global_options,options,args|
+
+  Deployit::connect(global_options)
+  Deployit.connection
+
+end
+
+exit run(ARGV)

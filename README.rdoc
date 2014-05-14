@@ -1,0 +1,6 @@
+= deployit_cmd
+
+Describe your project here
+
+:include:deployit_cmd.rdoc
+
