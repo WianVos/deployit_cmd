@@ -61,7 +61,7 @@ module Deployit
       return all_children
     end
 
-    def all_children_by_type(type)
+    def children_by_type(type)
       all_children.select {|c| type == c.type }
     end
 
@@ -115,7 +115,7 @@ module Deployit
       cis.collect {|ci| ci.id if ci.id =~ /#{filter}/ }
     end
 
-    
+
 
   end
 end

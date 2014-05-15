@@ -52,14 +52,8 @@ command :test do |c|
   c.default_value 'default'
   c.flag :f
   c.action do |global_options,options,args|
-   ci =  Deployit::Ci.new({'id' => 'Infrastructure/ZMM/zmm-test-demo2/dev/zs94a-qppnem'})
-   p "properties -----------------------"
-   p ci.properties
-   p "type -----------------------"
-   p ci.type
-   p "children -------------------------"
-   p ci.children
-   ci.children.each { |ci| pp ci.to_hash }
+   ci =  Deployit::Ci.new({'id' => 'Infrastructure/ZMM1', 'type' => 'core.Directory'})
+   ci.
 
     puts "test command ran"
   end

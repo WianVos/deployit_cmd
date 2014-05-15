@@ -79,10 +79,7 @@ module Deployit
       get_cis_with_properties.select {|id, hash| hash.has_key? property and hash[property] == value }
     end
 
-    # get all the children of the ci
-    def get_ci_children(ci_id)
-      cis_from_query("&parent=#{ci_id}")
-    end
+
 
 
     def method_missing(meth, *args, &block)
